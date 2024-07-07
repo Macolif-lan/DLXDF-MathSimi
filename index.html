@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Numerical Integration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .plot {
+            margin-top: 20px;
+        }
+        img {
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Numerical Integration</h1>
+    <form method="post">
+        <label for="function">Function (use 'x' as variable, e.g., 'exp(x)', 'log(x)', 'x**2'):</label>
+        <input type="text" id="function" name="function" value="{{ function_str }}">
+        <label for="a">a:</label>
+        <input type="text" id="a" name="a" value="{{ a }}">
+        <label for="b">b:</label>
+        <input type="text" id="b" name="b" value="{{ b }}">
+        <label for="n">Number of steps (n):</label>
+        <input type="text" id="n" name="n" value="{{ n }}">
+        <button type="submit">Calculate</button>
+    </form>
+    {% if rectangle_integral is not none %}
+    <div class="results">
+        <h2>Results</h2>
+        <p>Rectangle Integral: {{ rectangle_integral }}</p>
+        <p>Trapezoidal Integral: {{ trapezoidal_integral }}</p>
+        <p>Symbolic Integral: {{ symbolic_integral }}</p>
+        <p>Integral Derivation: ∫ f(x) dx = {{ integral_derivation }}</p>
+        <div class="plot">
+            <h3>Rectangle Method Plot</h3>
+            <img src="data:image/png;base64,{{ rectangle_plot }}">
+        </div>
+        <div class="plot">
+            <h3>Trapezoidal Method Plot</h3>
+            <img src="data:image/png;base64,{{ trapezoidal_plot }}">
+        </div>
+    </div>
+    {% endif %}
+</body>
+</html>
